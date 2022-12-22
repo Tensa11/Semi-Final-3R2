@@ -73,7 +73,7 @@ class _HomeState extends State<Home> {
                         keyboardType: TextInputType.multiline,
                         minLines: 1,
                         maxLines: 6,
-                  ),
+                    ),
                   const SizedBox(
                     height: 10,
                   ),
@@ -87,7 +87,7 @@ class _HomeState extends State<Home> {
                         keyboardType: TextInputType.multiline,
                         minLines: 5,
                         maxLines: 6,
-                  ),
+                    ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -103,7 +103,7 @@ class _HomeState extends State<Home> {
                           if (formKey.currentState!.validate()) {
                             if (id == null) {
                               await addItem();
-                            }
+                              }
                             if (id != null) {
                               await updateItem(id);
                             }
@@ -111,7 +111,7 @@ class _HomeState extends State<Home> {
                             setState(() {
                               _titleController.text = '';
                               _descriptionController.text = '';
-                            }
+                              }
                             );
                             // Close
                             // ignore: use_build_context_synchronously
@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.red,
                             foregroundColor: Colors.white,
-                          ),
+                            ),
                           onPressed: () {
                             Navigator.pop(context);
                           },
@@ -138,6 +138,7 @@ class _HomeState extends State<Home> {
         )
     );
   }
+
   String? formValidator(String? value) {
     if (value!.isEmpty) return 'Field is Required';
     return null;
@@ -171,7 +172,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('To-Do'),
-      ),
+        ),
       body: _isLoading
           ? const Center(
             child: CircularProgressIndicator(),

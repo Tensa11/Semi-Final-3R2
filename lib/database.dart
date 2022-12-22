@@ -22,44 +22,48 @@ class Sqflite {
       """);
   }
 
-  static Future<int> createItem(String? title, String? descrption) async {
+  static Future<int> createItem(String? title, String? description) async {
     final db = await Sqflite.db();
 
-    final data = {'title': title, 'description': descrption};
+    final data = {'title': title, 'description': description};
     final id = await db.insert('items', data,
         conflictAlgorithm: sql.ConflictAlgorithm.replace);
     return id;
   }
+
   // Read
   static Future<List<Map<String, dynamic>>> getItems() async {
     final db = await Sqflite.db();
     return db.query('items', orderBy: "id");
   }
+
   // Get
   static Future<List<Map<String, dynamic>>> getItem(int id) async {
     final db = await Sqflite.db();
     return db.query('items', where: "id = ?", whereArgs: [id], limit: 1);
   }
+
   // Update
   static Future<int> updateItem(
-      int id, String title, String? descrption) async {
+      int id, String title, String? description) async {
     final db = await Sqflite.db();
 
     final data = {
       'title': title,
-      'description': descrption,
+      'description': description,
       'createdAt': DateTime.now().toString()
     };
     final result =
     await db.update('items', data, where: "id = ?", whereArgs: [id]);
     return result;
   }
+
   // Delete
   static Future<void> deleteItem(int id) async {
     final db = await Sqflite.db();
     try {
       await db.delete("items", where: "id = ?", whereArgs: [id]);
-    } catch (err) {
+      } catch (err) {
       debugPrint("Something went wrong when deleting an item: $err");
     }
   }
